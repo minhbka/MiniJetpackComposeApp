@@ -2,10 +2,9 @@ package com.minhbka.miniapp.theme
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.lightColorScheme
 import androidx.compose.material3.darkColorScheme
+import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
-
 
 private val LightColors = lightColorScheme(
     primary = md_theme_light_primary,
@@ -38,7 +37,6 @@ private val LightColors = lightColorScheme(
     outlineVariant = md_theme_light_outlineVariant,
     scrim = md_theme_light_scrim,
 )
-
 
 private val DarkColors = darkColorScheme(
     primary = md_theme_dark_primary,
@@ -75,7 +73,9 @@ private val DarkColors = darkColorScheme(
 @Composable
 fun MiniAppTheme(
     useDarkTheme: Boolean = isSystemInDarkTheme(),
-    content: @Composable() () -> Unit
+    content:
+    @Composable()
+    () -> Unit,
 ) {
     val colors = if (!useDarkTheme) {
         LightColors
@@ -86,6 +86,6 @@ fun MiniAppTheme(
     MaterialTheme(
         colorScheme = colors,
         content = content,
-        typography = appTypography
+        typography = appTypography,
     )
 }

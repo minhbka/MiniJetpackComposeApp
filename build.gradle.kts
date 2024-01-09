@@ -70,6 +70,9 @@ fun PluginContainer.applyDefaultConfig(project: Project){
 
 subprojects{
     project.plugins.applyDefaultConfig(project)
+    afterEvaluate{
+        project.apply("${project.rootDir}/spotless.gradle")
+    }
     tasks.withType<KotlinCompile>{
         compilerOptions{
             jvmTarget.set(JvmTarget.JVM_17)

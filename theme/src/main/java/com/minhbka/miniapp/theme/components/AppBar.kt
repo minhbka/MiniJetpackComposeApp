@@ -1,6 +1,5 @@
 package com.minhbka.miniapp.theme.components
 
-import android.content.res.Configuration
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.Icon
@@ -12,19 +11,19 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.tooling.preview.Preview
 import com.minhbka.miniapp.theme.MiniAppTheme
 
 @Composable
 fun Appbar(
     title: String,
     navIcon: ImageVector? = null,
-    onNav: () -> Unit = {}
+    onNav: () -> Unit = {},
 ) {
     TopAppBar(
-        title = { Text(text = title) }, colors = TopAppBarDefaults.topAppBarColors(
+        title = { Text(text = title) },
+        colors = TopAppBarDefaults.topAppBarColors(
             containerColor = MaterialTheme.colorScheme.primaryContainer,
-            titleContentColor = MaterialTheme.colorScheme.primary
+            titleContentColor = MaterialTheme.colorScheme.primary,
         ),
         navigationIcon = {
             navIcon?.let {
@@ -32,13 +31,13 @@ fun Appbar(
                     Icon(navIcon, contentDescription = "Nav Icon")
                 }
             }
-        }
+        },
     )
 }
 
 @Composable
 @AppPreview
-private fun AppBarPreview(){
+private fun AppBarPreview() {
     MiniAppTheme {
         Surface {
             Appbar(title = "Mini App", navIcon = Icons.Filled.ArrowBack)

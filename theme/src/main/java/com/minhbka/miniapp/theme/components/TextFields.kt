@@ -40,7 +40,7 @@ fun AppTextField(
     @StringRes error: Int? = null,
     keyboardType: KeyboardType = KeyboardType.Text,
     imeAction: ImeAction = ImeAction.Done,
-    onDone: () -> Unit = {}
+    onDone: () -> Unit = {},
 
 ) {
     val focusManager = LocalFocusManager.current
@@ -48,7 +48,7 @@ fun AppTextField(
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .height(90.dp)
+            .height(90.dp),
     ) {
         TextField(
             value = value,
@@ -62,7 +62,7 @@ fun AppTextField(
                     Text(
                         text = stringResource(id = error),
                         modifier = Modifier.fillMaxWidth(),
-                        color = MaterialTheme.colorScheme.error
+                        color = MaterialTheme.colorScheme.error,
                     )
                 }
             },
@@ -84,12 +84,12 @@ fun AppTextField(
                     focusManager.clearFocus()
                     onDone()
                 },
-                onNext = { focusManager.moveFocus(FocusDirection.Down) }
+                onNext = { focusManager.moveFocus(FocusDirection.Down) },
             ),
             keyboardOptions = KeyboardOptions(
                 keyboardType = keyboardType,
-                imeAction = imeAction
-            )
+                imeAction = imeAction,
+            ),
         )
     }
 }
@@ -114,7 +114,6 @@ fun AppTextFieldPreview() {
                 },
                 placeholder = { Text(text = "Hint") },
             )
-
         }
     }
 }

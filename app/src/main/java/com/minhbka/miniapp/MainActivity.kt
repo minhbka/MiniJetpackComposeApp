@@ -14,11 +14,10 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             MiniAppTheme {
-                Surface (modifier = Modifier.fillMaxSize()){
+                Surface(modifier = Modifier.fillMaxSize()) {
                     Text(text = "Hello Mini App")
                 }
             }
         }
-
     }
 }
