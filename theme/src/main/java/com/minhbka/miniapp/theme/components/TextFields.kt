@@ -54,7 +54,7 @@ fun AppTextField(
             modifier = Modifier
                 .fillMaxWidth(),
             value = value,
-            onValueChange = { onValueChanged },
+            onValueChange = { onValueChanged(it) },
             singleLine = true,
             isError = error != null,
             readOnly = isClickOnly,

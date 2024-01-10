@@ -24,18 +24,25 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.minhbka.auth.R
 import com.minhbka.miniapp.theme.MiniAppTheme
 import com.minhbka.miniapp.theme.components.AppPreview
 import com.minhbka.miniapp.theme.components.AppTextField
 
 @Composable
-fun LoginScreen() {
-    Login()
+fun LoginScreen(viewModel: LoginViewModel) {
+    val uiState = viewModel.uiState.collectAsStateWithLifecycle()
+    Login(uiState = uiState.value, onEvent = {
+        viewModel.onEvent(it)
+    })
 }
 
 @Composable
-fun Login() {
+fun Login(
+    uiState: LoginUiState,
+    onEvent: (LoginUiEvent) -> Unit
+) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -52,20 +59,21 @@ fun Login() {
         )
 
         AppTextField(
-            value = "minhbka@gmail.com",
+            value = uiState.email,
             label = R.string.email,
             hint = "yourname@domain.com",
             leadingIcon = Icons.Filled.Email,
             imeAction = ImeAction.Next,
-            onValueChanged = {})
+            onValueChanged = { onEvent(LoginUiEvent.EmailChanged(it)) })
 
         AppTextField(
-            value = "12345",
+            value = uiState.password,
+            isPasswordField = true,
             label = R.string.password,
             hint = "password",
             leadingIcon = Icons.Filled.Lock,
             imeAction = ImeAction.Done,
-            onValueChanged = {})
+            onValueChanged = { onEvent(LoginUiEvent.PasswordChanged(it)) })
 
         Row(modifier = Modifier.fillMaxWidth()) {
             Column(
@@ -118,8 +126,8 @@ fun Login() {
 @Composable
 private fun LoginPreview() {
     MiniAppTheme {
-        Surface (modifier = Modifier.fillMaxSize()){
-            Login()
+        Surface(modifier = Modifier.fillMaxSize()) {
+            Login(uiState = LoginUiState(), onEvent = {})
         }
     }
 

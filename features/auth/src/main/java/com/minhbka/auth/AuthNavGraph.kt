@@ -1,5 +1,6 @@
 package com.minhbka.auth
 
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
@@ -25,7 +26,7 @@ fun NavGraphBuilder.authNavGraph(
             navController.navigate(AuthScreen.Login.route)
         }
         composable(AuthScreen.Login.route){
-            LoginScreen()
+            LoginScreen(viewModel())
         }
     }
 
