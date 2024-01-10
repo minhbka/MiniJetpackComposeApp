@@ -18,7 +18,10 @@ android {
     buildTypes {
         release {
             isMinifyEnabled = false
-            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
         }
     }
 
@@ -36,7 +39,7 @@ dependencies {
 //    implementation(projects.common.data)
 //    implementation(projects.common.domain)
 //
-//    implementation(projects.features.auth)
+    implementation(projects.features.auth)
 //    implementation(projects.features.auth.data)
 //    implementation(projects.features.auth.domain)
 //
