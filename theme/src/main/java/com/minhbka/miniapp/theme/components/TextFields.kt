@@ -51,6 +51,8 @@ fun AppTextField(
             .height(90.dp),
     ) {
         TextField(
+            modifier = Modifier
+                .fillMaxWidth(),
             value = value,
             onValueChange = { onValueChanged },
             singleLine = true,
@@ -91,29 +93,5 @@ fun AppTextField(
                 imeAction = imeAction,
             ),
         )
-    }
-}
-
-@AppPreview
-@Composable
-fun AppTextFieldPreview() {
-    MiniAppTheme {
-        Surface {
-            TextField(
-                value = "",
-                onValueChange = {},
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .clickable { },
-                singleLine = true,
-                isError = true,
-                readOnly = false,
-                enabled = true,
-                supportingText = {
-                    Text(text = "Error Message or Supporting Message")
-                },
-                placeholder = { Text(text = "Hint") },
-            )
-        }
     }
 }
