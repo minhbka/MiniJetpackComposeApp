@@ -26,14 +26,16 @@ class RequestHandler(val httpClient: HttpClient) {
                 val response = httpClient.prepareRequest {
                     this.method = method
                     url {
-                        val pathSegment = urlPathSegments.map { it.toString() }
+                        val pathSegments = urlPathSegments.map { it.toString() }
                         appendPathSegments(pathSegments)
                     }
                     body?.let {
-                        setBody(it)
+                        setBody(body)
                     }
                     queryParams?.let { params ->
-                        params.map { parameter(it.key, it.value) }
+                        params.forEach { (key, value) ->
+                            parameter(key, value)
+                        }
                     }
                 }.execute().body<R>()
                 NetworkResult.Success(response)
@@ -64,7 +66,14 @@ class RequestHandler(val httpClient: HttpClient) {
         urlPathSegments = urlPathSegments.toList(),
         queryParams = queryParams
     )
-
+    suspend inline fun <reified B, reified R> put(
+        urlPathSegments: List<Any>,
+        body: B? = null,
+    ): NetworkResult<R> = executeRequest(
+        method = HttpMethod.Put,
+        urlPathSegments = urlPathSegments.toList(),
+        body = body,
+    )
     suspend inline fun <reified B, reified R> post(
         urlPathSegments: List<Any>,
         body: B? = null
@@ -72,6 +81,15 @@ class RequestHandler(val httpClient: HttpClient) {
         method = HttpMethod.Post,
         urlPathSegments = urlPathSegments.toList(),
         body = body
+    )
+
+    suspend inline fun <reified B, reified R> delete(
+        urlPathSegments: List<Any>,
+        body: B? = null,
+    ): NetworkResult<R> = executeRequest(
+        method = HttpMethod.Delete,
+        urlPathSegments = urlPathSegments.toList(),
+        body = body,
     )
 }
 

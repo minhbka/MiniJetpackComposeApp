@@ -20,7 +20,7 @@ import kotlinx.serialization.json.Json
 class MiniAppHttpClientBuilder {
     private lateinit var protocol:URLProtocol
     private lateinit var host:String
-    private var port:Int = 8080
+    private var port:Int? = null
 
     fun protocol(protocol:URLProtocol) = apply { this.protocol = protocol }
     fun host(host:String) = apply { this.host = host }
@@ -40,7 +40,7 @@ class MiniAppHttpClientBuilder {
                 url{
                     this.protocol =  this@MiniAppHttpClientBuilder.protocol
                     this.host = this@MiniAppHttpClientBuilder.host
-                    this.port = this@MiniAppHttpClientBuilder.port
+                    this@MiniAppHttpClientBuilder.port?.let { this.port = it }
                 }
                 header(HttpHeaders.ContentType, "application/json")
             }

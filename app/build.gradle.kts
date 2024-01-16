@@ -22,26 +22,31 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            buildConfigField("String", "MINI_APP_HOST", "\"not given\"")
+        }
+        debug {
+            buildConfigField("String", "MINI_APP_HOST", "\"192.168.0.24\"")
         }
     }
 
     buildFeatures {
         compose = true
+        buildConfig = true
     }
 
 }
 
 dependencies {
 //    dependenciesimplementation(projects.theme)
-//    implementation(projects.network)
+    implementation(projects.network)
 //    implementation(projects.storage)
 //    implementation(projects.common)
 //    implementation(projects.common.data)
 //    implementation(projects.common.domain)
 //
     implementation(projects.features.auth)
-//    implementation(projects.features.auth.data)
-//    implementation(projects.features.auth.domain)
+    implementation(projects.features.auth.data)
+    implementation(projects.features.auth.domain)
 //
 //    implementation(projects.features.home)
 //    implementation(projects.features.home.data)
